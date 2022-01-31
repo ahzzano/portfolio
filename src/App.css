@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
+.front-page {
+  width:100%;
+  height: 90vh;
+  background-image: url('https://assets.hongkiat.com/uploads/minimalist-dekstop-wallpapers/4k/original/14.jpg');
+  background-size: cover;
+  display: grid;
+  place-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.intro-card {
+  color:white;
+  width: 35%;
+  padding: 15px;
+  text-align: left;
+  border-radius: 12px;
+  font-size: xx-large;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+  height:90vh;
+  width:100%;
+  display:grid;
+  place-items: center;
+  background-color: darkolivegreen;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.contact {
+  background-color: darkslategrey;
   color: white;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.main-card-content {
+  padding: 45px;
+  font-size: xx-large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-card {
+  height: 75%;
+  width: 65%;
+  background-color: darkorange;
+  border-radius: 12px;
+  display:grid;
+  place-items: center;
+}
+
+.footer-content {
+  padding-left: 10rem;
 }
