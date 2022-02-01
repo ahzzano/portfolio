@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+
+* {
+  font-family: 'Roboto Mono', monospace;
+}
+
 .front-page {
   width:100%;
-  height: 90vh;
+  height: 100vh;
   background-image: url('https://assets.hongkiat.com/uploads/minimalist-dekstop-wallpapers/4k/original/14.jpg');
   background-size: cover;
   display: grid;
@@ -17,8 +23,7 @@
 }
 
 .content {
-  height:90vh;
-  width:100%;
+  width: 100%;
   display:grid;
   place-items: center;
   background-color: darkolivegreen;
@@ -30,20 +35,47 @@
   padding: 10px;
 }
 
+.main-card-component {
+  width: 100%;
+}
+
 .main-card-content {
   padding: 45px;
+  width: 90%;
+  height: 90%;
   font-size: xx-large;
 }
 
+.main-card-buttons {
+  margin-top: 5%;
+  display:flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.main-card-buttons > button {
+  padding: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+  border-color: #00000000;
+  border-radius: 12px;
+}
+
 .main-card {
-  height: 75%;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   width: 65%;
   background-color: darkorange;
   border-radius: 12px;
   display:grid;
   place-items: center;
+  color:white;
 }
 
 .footer-content {
   padding-left: 10rem;
+}
+
+.information {
+  font-size: 1.25rem;
 }
