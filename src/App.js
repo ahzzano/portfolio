@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
+import ContactForm from './ContactForm';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 
 function About() {
   return (
@@ -74,29 +76,45 @@ function IntroductionCard() {
 }
 
 function App() {
+  const parallaxRef = useRef(null)
+
+  const moveToPage = (to) => {
+    if(parallaxRef.current) {
+      parallaxRef.current.scrollTo(to)
+    }
+  }
+
+  
+
   return (
     <div>
-      <header class="front-page">
-        <div class="intro-card">
-          <h1>ahzzan and ayscrim</h1>
-          <p>
-            We make streamer essentials
-          </p>
-        </div>
-      </header>
+      <Parallax pages={3} style={{ top: '0', left: '0', backgroundColor: "#1c2321"}} ref={parallaxRef} >
+        <ParallaxLayer offset={0}>
+          <header class="front-page" onClick={() => {moveToPage(1)}}>
+            <div class="intro-card">
+              <h1>ahzzan and ayscrim</h1>
+              <p>
+                We make streamer essentials
+              </p>
+            </div>
+          </header>
+        </ParallaxLayer>
 
-      <div class="content">
-        <IntroductionCard/>
-      </div>
+        <ParallaxLayer offset={1} speed={0.5} class="content">
+          <IntroductionCard/>
+        </ParallaxLayer>
 
-      <footer class="contact">
-        <div class="footer-content">
-          <h1>Contact us Today</h1>
-          <p>
-            genis_esports@ph.com
-          </p>
-        </div>
-      </footer>
+        <ParallaxLayer offset={2} speed={0.5} style={{backgroundColor:'darkslategrey'}}/>
+
+        <ParallaxLayer offset={2} speed={1}>
+
+            <div class="footer-content">
+              <h1>Contact us Today</h1>
+              <ContactForm/>
+            </div>
+
+        </ParallaxLayer>
+      </Parallax>
     </div>
   );
 }
