@@ -2,17 +2,16 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import ContactForm from './ContactForm';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { useSpring, animated, useTransition } from 'react-spring';
 
 function About() {
   return (
     <div>
       <h2 style={{textAlign: 'center'}}>About Us</h2>
       <p class="information">
-      Nadeko is a young girl with dark brown hair and chocolate brown eyes. She is 153 cm(5'0") and her weight is around 38 kg. During the times when she was still cursed by the jagirinawa, her outfit consisted of a waist pouch, an orange newsboy cap, a pink blouse, an orange jacket and a pair of baggy denims — all of which were designed to hide the scars that covered her body. She also always casts her eyes downward, with long fringes covering her eyes. It can be assumed that her newsboy cap represents the "snake" that cursed her, as its shape resembles a snake's head.
-
-      She later changes her style to a more comfortable set of clothes after being relieved of the curse, and she shows a preference to wearing skirts.
-
-      Later in the series, she cuts her hair short.
+        We make streamer essentials such as 
+        - alert boxes
+        - stinger transitions
       </p>
 
     </div>
@@ -24,25 +23,42 @@ function Pricing() {
     <div>
       <h2 style={{textAlign: 'center'}}>Price</h2>
       <p class="information">
-        We are worth 10 vbucks
+        $10 - Basic Package
+        $20 - Advanced Package
+        $30 - Ultimate Package
       </p>
     </div>
   )
 }
 
-function Commission() {
+function Commission(props) {
   return (
     <div>
       <h2 style={{textAlign: 'center'}}>Commission</h2>
       <p class="information">
-        We are currently open
+        We are currently open for commisions
+        
       </p>
+      <div style={{
+        display: 'grid',
+        placeContent: 'center',
+        border: 'none'
+      }}>
+        <button onClick={props.goToContacts} class="commission-card-button">Contact Us Now</button>
+      </div>
     </div>
   )
 }
 
-function IntroductionCard() {
+function IntroductionCard(props) {
   const [page, setPage] = useState('about')
+
+  const textFadeTransition = useTransition (page, {
+    from: { opacity: 0 },
+    enter: { opacity: 1, display: 'block' },
+    leave: { opacity: 0, display: 'none' },
+  })
+
 
   let currentComponent
 
@@ -54,16 +70,20 @@ function IntroductionCard() {
       currentComponent = <Pricing/>
       break
     case 'commission':
-      currentComponent = <Commission/>
+      currentComponent = <Commission goToContacts={() => {props.toContact()}}/>
       break
   }
 
   return (
-    <div class="main-card">
+    <animated.div class="main-card">
       <div class="main-card-content">
-        <div class="main-card-component">
-          {currentComponent}
-        </div>
+        {
+          textFadeTransition((styles, item) => (
+            <animated.div class="main-card-component" style={styles}>
+              {currentComponent}
+            </animated.div>
+          ))
+        }
 
         <div class="main-card-buttons">
           <button onClick={() => {setPage('about')}}>About</button>
@@ -71,7 +91,7 @@ function IntroductionCard() {
           <button onClick={() => {setPage('commission')}}>Commission</button>
         </div>
       </div>
-    </div>
+    </animated.div>
   )
 }
 
@@ -83,8 +103,6 @@ function App() {
       parallaxRef.current.scrollTo(to)
     }
   }
-
-  
 
   return (
     <div>
@@ -101,10 +119,10 @@ function App() {
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.5} class="content">
-          <IntroductionCard/>
+          <IntroductionCard toContact={() => {moveToPage(2)}}/>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={2} speed={0.5} style={{backgroundColor:'darkslategrey'}}/>
+        <ParallaxLayer offset={2} speed={0.5} style={{backgroundColor:'#5E6572'}}/>
 
         <ParallaxLayer offset={2} speed={1}>
 

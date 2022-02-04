@@ -1369,6 +1369,14 @@
     "@react-spring/shared" "~9.4.0"
     "@react-spring/types" "~9.4.0"
 
+"@react-spring/parallax@^9.4.2":
+  version "9.4.2"
+  resolved "https://registry.yarnpkg.com/@react-spring/parallax/-/parallax-9.4.2.tgz#e63fa99014b5d1da7a03990f43ed4e30e8161aa7"
+  integrity sha512-eux+L+GhSTk/v1nobyNWpGGQnTo5pRS4fjYM5QkaWFne1T+mutr/24kyfEDpUCx4k2G48Ul+5ZqGsiRTm/4tGA==
+  dependencies:
+    "@react-spring/shared" "~9.4.0"
+    "@react-spring/web" "~9.4.0"
+
 "@react-spring/rafz@~9.4.0":
   version "9.4.2"
   resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.4.2.tgz#40a663d407cd116d436f662c6849f8e5b56234b6"
