@@ -23,6 +23,7 @@ function ContactForm() {
                 type="email"
                 name="email"
                 placeholder="user@gmail.com"
+                required
             />
             <span>Name</span>
             <input
@@ -40,6 +41,7 @@ function ContactForm() {
                 id="message"
                 name="message"
                 placeholder="inquiry"
+                required
             />
             <ValidationError 
                 prefix="Message" 
@@ -49,6 +51,7 @@ function ContactForm() {
             <button type="submit" disabled={state.submitting}>
                 Submit
             </button>
+            
         </form>
     )
 }

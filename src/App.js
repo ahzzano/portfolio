@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 import ContactForm from './ContactForm';
 import { Parallax, ParallaxLayer } from '@react-spring/parallax'
-import { useSpring, animated, useTransition } from 'react-spring';
+import StaffProfile from './StaffProfile';
+import { useSpring, animated, useTransition, useChain, useSpringRef } from 'react-spring';
 
 function About() {
   return (
@@ -14,6 +15,9 @@ function About() {
         - stinger transitions
       </p>
 
+      <StaffProfile image="https://nadeko.bot/static/media/nadeko-top.ad6cc06a.png" profileName="ahzzan" roles={"Programmer"}/>
+
+      <StaffProfile image="https://i.pinimg.com/736x/b9/30/83/b93083bb28cd5fefc1353c04f59cec3e.jpg" profileName="ayscrim" roles={"Editor"}/>
     </div>
   )
 }
@@ -37,7 +41,6 @@ function Commission(props) {
       <h2 style={{textAlign: 'center'}}>Commission</h2>
       <p class="information">
         We are currently open for commisions
-        
       </p>
       <div style={{
         display: 'grid',
@@ -53,10 +56,19 @@ function Commission(props) {
 function IntroductionCard(props) {
   const [page, setPage] = useState('about')
 
-  const textFadeTransition = useTransition (page, {
+  const textFadeRef = useSpringRef()
+  const textFadeTransition = useTransition(page, {
     from: { opacity: 0 },
     enter: { opacity: 1, display: 'block' },
-    leave: { opacity: 0, display: 'none' },
+    leave: { opacity: 0, display: 'none' }
+  })
+  
+  const heightRef = useSpringRef()
+  const heightAnimation = useSpring({
+    to: [
+      { maxHeight: '1%', overflow: 'hidden' },
+      { maxHeight: '100%', overflow: 'hidden' }
+    ]
   })
 
 
@@ -75,8 +87,8 @@ function IntroductionCard(props) {
   }
 
   return (
-    <animated.div class="main-card">
-      <div class="main-card-content">
+    <animated.div class="main-card" style={heightAnimation}>
+      <animated.div class="main-card-content">
         {
           textFadeTransition((styles, item) => (
             <animated.div class="main-card-component" style={styles}>
@@ -90,7 +102,7 @@ function IntroductionCard(props) {
           <button onClick={() => {setPage('pricing')}}>Pricing</button>
           <button onClick={() => {setPage('commission')}}>Commission</button>
         </div>
-      </div>
+      </animated.div>
     </animated.div>
   )
 }
@@ -104,17 +116,29 @@ function App() {
     }
   }
 
+  const fadeIn = useSpring({
+    to: {
+      opacity: 1,
+      transform: 'translateY(0px)'
+    },
+    from: {
+      opacity: 0,
+      transform: 'translateY(120px)'
+    },    
+  })
+
   return (
     <div>
       <Parallax pages={3} style={{ top: '0', left: '0', backgroundColor: "#1c2321"}} ref={parallaxRef} >
         <ParallaxLayer offset={0}>
+
           <header class="front-page" onClick={() => {moveToPage(1)}}>
-            <div class="intro-card">
+            <animated.div class="intro-card" style={fadeIn}>
               <h1>ahzzan and ayscrim</h1>
               <p>
                 We make streamer essentials
               </p>
-            </div>
+            </animated.div>
           </header>
         </ParallaxLayer>
 
